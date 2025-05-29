@@ -1,0 +1,6 @@
+streamlit
+pandas
+numpy
+plotly
+openpyxl    # engine for XLSX
+xlrd        # engine for XLS
