@@ -21,8 +21,12 @@ def parse_election_data(df):
         for col in df_str.columns:
             cell_value = str(row[col]).strip()  # Get cell value as stripped string
             # Check if the cell indicates a council section (like "1 - XYZ COUNCIL")
+
+            prefixes = tuple(f"{i} -" for i in range(1, 24))
+            text = cell_value.strip().lower()
+                        
             if (cell_value.startswith(('1 -', '2 -', '3 -', '4 -', '5 -', '6 -', '7 -', '8 -', '9 -', '10 -','11 -' ,'12 -','13 -','14 -','15 -','16 -','17 -','18 -','19 -','20 -','21 -','22 -','23 -' )) and 
-                ('COUNCIL' in cell_value.upper() or 'SABHA' in cell_value.upper())):
+                text.startswith(prefixes) and ("council" in text or "sabha" in text)):
                 council_sections.append((idx, cell_value))  # Save the row index and council title
                 break  # Stop checking other columns in this row once found
     
